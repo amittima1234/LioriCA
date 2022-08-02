@@ -1,7 +1,6 @@
 import styles from "./index.module.css";
 import NavbarButton from "../navbarButton";
 import { IoLogIn } from "react-icons/io5";
-import { TbFileCertificate } from "react-icons/tb";
 import { BsFileEarmarkMedicalFill } from "react-icons/bs";
 
 

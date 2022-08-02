@@ -8,11 +8,10 @@ export default function App() {
   return (
     <div className={styles.app}>
       <Router>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route path="login" element={<Login />} />
-            <Route path="uploadReqForm" element={<UploudReqFrom />} />
-          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/uploadReqForm" element={<UploudReqFrom />} />
         </Routes>
       </Router>
     </div>
