@@ -1,8 +1,10 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
+const cors = require("cors");
 const app = express();
 const port = 8008;
+app.use(cors());
 
 const CA_FOLDER_PATH = "/home/amit/ca";
 const BACKEND_PATH = "/home/amit/git-projects/LioriCA/backend";
@@ -57,7 +59,7 @@ app.post("/submitReq", async (req, res) => {
       console.log(`stdout: ${stdout}`);
     }
   );
-  const fileName = `${CA_FOLDER_PATH}/pki/issued/${reqName}.crt`
+  const fileName = `${CA_FOLDER_PATH}/pki/issued/${reqName}.crt`;
   res.sendFile(fileName, function (err) {
     if (err) {
       res.send(err);

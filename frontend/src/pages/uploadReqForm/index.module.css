@@ -1,0 +1,24 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--main-marging));
+  margin: auto;
+}
+
+.form-field {
+  display: flex;
+  justify-content: left;
+  margin: calc(var(--main-marging));
+  gap: calc(var(--main-marging));
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: calc(var(--main-marging));
+}
+
+.submit-button {
+  display: flex;
+  margin: calc(var(--main-marging));
+}
