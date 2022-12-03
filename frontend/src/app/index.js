@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "../pages/login";
-import UploudReqFrom from "../pages/uploadReqForm";
+import Uploud from "../pages/upload";
 import Navbar from "../components/navbar";
 import styles from "./index.module.css";
 
@@ -12,7 +12,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/uploadReqForm" element={<UploudReqFrom />} />
+          <Route path="/upload" element={<Uploud />} />
         </Routes>
       </Router>
     </div>

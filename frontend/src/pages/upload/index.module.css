@@ -12,12 +12,6 @@
   gap: calc(var(--main-marging));
 }
 
-.form-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: calc(var(--main-marging));
-}
-
 .submit-button {
   display: flex;
   margin: calc(var(--main-marging));

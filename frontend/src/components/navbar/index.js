@@ -14,7 +14,7 @@ export default function Navbar() {
         <NavbarButton title={"Login"} to={"/login"} Icon={IoLogIn} />
         <NavbarButton
           title={"Request a Certificate"}
-          to={"/uploadReqForm"}
+          to={"/upload"}
           Icon={BsFileEarmarkMedicalFill}
         />
       </div>
