@@ -26,7 +26,7 @@ app.post("/upload", (req, res) => {
   if (req.files) {
     console.log(req.files);
     const requestFile = req.files.requestFile;
-    const certificateName = req.body.certificateName; //req.body.fileName;
+    const certificateName = req.body.certificateName;
     console.log(requestFile);
     const uploadPath = "./reqs/" + certificateName + ".req";
     requestFile.mv(uploadPath, (err) => {
