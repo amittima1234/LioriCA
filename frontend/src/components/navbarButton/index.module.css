@@ -1,0 +1,45 @@
+:root {
+  --main-padding-x: 0.6em;
+  --main-padding-y: 0.3em;
+}
+
+.container {
+  width: calc(100% - 2 * var(--main-padding-x));
+  height: calc(40% - 2 * var(--main-padding-y));
+  display: flex;
+  align-items: center;
+  background-color: none;
+  border-radius: 0.6em;
+  user-select: none;
+  padding: var(--main-padding-y) var(--main-padding-x);
+  margin: 0.3em 0;
+  text-decoration: none;
+}
+
+.container:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.text {
+  text-decoration: none;
+  flex: 1;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+.icon {
+  text-decoration: none;
+  margin-right: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.icon > svg {
+  fill: var(--primary-text-color);
+}
