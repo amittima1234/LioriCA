@@ -10,7 +10,7 @@ export default function Uploud() {
     formData.append("requestFile", data.requestFile[0]);
     formData.append("certificateName", data.certificateName);
     axios
-      .post("http://ubuntu2004.wsl:8008/upload", formData, {
+      .post("http://debian.wsl:8008/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

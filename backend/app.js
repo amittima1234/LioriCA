@@ -6,7 +6,7 @@ const app = express();
 const port = 8008;
 app.use(cors());
 
-const CA_FOLDER_PATH = "/home/amit/ca";
+const CA_FOLDER_PATH = "/home/amit/ca/easy-rsa";
 const BACKEND_PATH = "/home/amit/git-projects/LioriCA/backend";
 const CERT_TYPE = "server";
 
