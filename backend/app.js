@@ -22,12 +22,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.post("/upload", (req, res) => {
+app.patch("/upload", (req, res) => {
   if (req.files) {
-    console.log(req.files);
     const requestFile = req.files.requestFile;
     const certificateName = req.body.certificateName;
-    console.log(requestFile);
     const uploadPath = "./reqs/" + certificateName + ".req";
     requestFile.mv(uploadPath, (err) => {
       if (err) {
