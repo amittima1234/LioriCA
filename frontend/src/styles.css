@@ -1,0 +1,20 @@
+html,
+body,
+#root {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Rubik', sans-serif;
+  color: var(--primary-text-color);
+}
+
+:root {
+  --primary-background: #010409;
+  --secondary-background: #0d1117;
+  --active-background: #1a212c;
+  --secondary-active-background: #19202b;
+  --primary-text-color: #c9d1d9;
+  --hover-color: #3d4858;
+  --hover-text-color: #0080ff;
+  --text-color: #ffffff;
+}
