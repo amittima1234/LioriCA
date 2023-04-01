@@ -11,7 +11,7 @@ export default function Uploud() {
     formData.append("requestFile", data.requestFile[0]);
     formData.append("certificateName", data.certificateName);
     axios
-      .patch("http://debian.wsl:8008/upload", formData, {
+      .patch("http://localhost:8008/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

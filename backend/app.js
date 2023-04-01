@@ -3,14 +3,18 @@ const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
 const cors = require("cors");
 const app = express();
-const port = 8008;
+
+require('dotenv').config();
+
 app.use(cors());
 
-const CA_FOLDER_PATH = "/home/amit/ca/easy-rsa";
-const BACKEND_PATH = "/home/amit/git-projects/LioriCA/backend";
+const CA_FOLDER_PATH = `${process.env.CA_FOLDER_PATH}`;
+const BACKEND_PATH = `${process.env.BACKEND_PATH}`;
+const BACKEND_PORT = `${process.env.BACKEND_PORT}`;
 const CERT_TYPE = "server";
 
 app.use(express.json());
+app.use(express.static('build'))
 
 app.use(
   fileUpload({
@@ -30,31 +34,15 @@ app.patch("/upload", (req, res) => {
     requestFile.mv(uploadPath, (err) => {
       if (err) {
         res.status(404).send(err);
-        return;
       } else {
-        execSync(
-          `./scripts/importAndSubmitReq.sh ${CA_FOLDER_PATH} ${BACKEND_PATH}/reqs/${certificateName}.req ${certificateName} ${CERT_TYPE}`,
-          (error, stdout, stderr) => {
-            if (error) {
-              console.log(`error: ${error.message}`);
-              return;
-            }
-            if (stderr) {
-              console.log(`stderr: ${stderr}`);
-              return;
-            }
-            console.log(`stdout: ${stdout}`);
-          }
-        );
-        const fileName = `${CA_FOLDER_PATH}/pki/issued/${certificateName}.crt`;
-        res.sendFile(fileName, (err) => {
+        const issuedCertificate = issueNewCert(certificateName);
+        res.sendFile(issuedCertificate, (err) => {
           if (err) {
             res.send(err);
           } else {
-            console.log("Sent:", fileName);
+            console.log("Sent:", issuedCertificate);
           }
         });
-        return;
       }
     });
   } else {
@@ -62,6 +50,23 @@ app.patch("/upload", (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+const issueNewCert = (certificateName) => {
+  execSync(
+    `./scripts/importAndSubmitReq.sh ${CA_FOLDER_PATH} ${BACKEND_PATH}/reqs/${certificateName}.req ${certificateName} ${CERT_TYPE}`,
+    (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`);
+      } else if (stderr) {
+        console.log(`stderr: ${stderr}`);
+      } else {
+        console.log(`stdout: ${stdout}`);
+      }
+    }
+  );
+  return `${CA_FOLDER_PATH}/pki/issued/${certificateName}.crt`;
+
+};
+
+app.listen(BACKEND_PORT, () => {
+  console.log(`Example app listening on port ${BACKEND_PORT}`);
 });
