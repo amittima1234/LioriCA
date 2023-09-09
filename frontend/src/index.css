@@ -55,3 +55,9 @@ Button:hover::after {
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

@@ -14,7 +14,7 @@ function Register(): JSX.Element {
 
     const onFormSubmit = async (user: User) => {
         try {
-            // await authService.register(user);
+            await authService.register(user);
             navigate('/home');
         } catch (err: any) {
             console.log(err.message);
@@ -42,10 +42,7 @@ function Register(): JSX.Element {
                 </div>
                 <div>
                     <label>מייל</label>
-                    <input
-                        type="email"
-                        {...register('email', User.requiredValidation)}
-                    ></input>
+                    <input {...register('email', User.emailValidation)}></input>
                     <small className="Error">{errors?.email?.message}</small>
                 </div>
                 <div>

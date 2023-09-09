@@ -14,7 +14,7 @@ function Login(): JSX.Element {
 
     const onFormSubmit = async (credentials: Credentials) => {
         try {
-            // await authService.login(credentials);
+            await authService.login(credentials);
             navigate('/home');
         } catch (err: any) {
             console.log(err.message);
@@ -27,8 +27,7 @@ function Login(): JSX.Element {
                 <div>
                     <label>מייל</label>
                     <input
-                        type="email"
-                        {...register('email', Credentials.requiredValidation)}
+                        {...register('email', Credentials.emailValidation)}
                     ></input>
                     <small className="Error">
                         {errors?.email?.message || ''}
@@ -40,7 +39,7 @@ function Login(): JSX.Element {
                         type="password"
                         {...register(
                             'password',
-                            Credentials.requiredValidation
+                            Credentials.passwordValidation
                         )}
                     ></input>
                     <small className="Error">
