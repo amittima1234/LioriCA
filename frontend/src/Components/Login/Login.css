@@ -1,0 +1,54 @@
+.Login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 35px;
+    position: relative;
+}
+
+.Login > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    padding: 50px;
+    gap: 20px;
+    background-color: #ffffffc9;
+    color: #777;
+    border-radius: 60px;
+    box-shadow: #00000029 0px 0px 14px;
+    height: 300px;
+}
+
+.Login > form > div {
+    direction: rtl;
+}
+
+.Login > form > div > input {
+    color: white;
+    height: 30px;
+    width: 250px;
+    background: none;
+    border: none;
+    box-shadow: #00000029 0px 0px 4px 1px;
+    border-radius: 50px;
+    margin: 8px 0;
+}
+
+.Login > form > div > input:focus {
+    outline: none;
+}
+
+.Login > form > Button {
+    border: none;
+    width: 125px;
+}
+
+.Register {
+    position: absolute;
+    bottom: 0;
+}
+
+.Error {
+    color: red;
+}
