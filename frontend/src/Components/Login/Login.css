@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 35px;
+    padding-top: 50px;
     position: relative;
 }
 
@@ -10,14 +10,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px;
+    box-sizing: border-box;
+    width: 350px;
     padding: 50px;
-    gap: 20px;
+    gap: 16px;
     background-color: #ffffffc9;
     color: #777;
     border-radius: 60px;
     box-shadow: #00000029 0px 0px 14px;
-    height: 300px;
+    height: 350px;
+    position: relative;
 }
 
 .Login > form > div {
@@ -32,7 +34,6 @@
     border: none;
     box-shadow: #00000029 0px 0px 4px 1px;
     border-radius: 50px;
-    margin: 8px 0;
 }
 
 .Login > form > div > input:focus {
@@ -40,15 +41,17 @@
 }
 
 .Login > form > Button {
+    position: absolute;
+    bottom: 50px;
     border: none;
     width: 125px;
 }
 
-.Register {
+.ToRegisterBtn {
     position: absolute;
     bottom: 0;
 }
 
 .Error {
-    color: red;
+    color: rgba(194, 18, 18, 0.685);
 }

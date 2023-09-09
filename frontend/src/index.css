@@ -29,6 +29,7 @@ Button:active {
 }
 
 Button {
+    border: none;
     background-color: #fff;
     color: #777;
 }

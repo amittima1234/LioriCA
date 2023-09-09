@@ -30,7 +30,7 @@ function Register(): JSX.Element {
                         type="text"
                         {...register('name', User.requiredValidation)}
                     ></input>
-                    <span className="Error">{errors?.name?.message}</span>
+                    <small className="Error">{errors?.name?.message}</small>
                 </div>
                 <div>
                     <label>תעודת זהות</label>
@@ -38,7 +38,7 @@ function Register(): JSX.Element {
                         type="number"
                         {...register('id', User.requiredValidation)}
                     ></input>
-                    <span className="Error">{errors?.email?.message}</span>
+                    <small className="Error">{errors?.email?.message}</small>
                 </div>
                 <div>
                     <label>מייל</label>
@@ -46,7 +46,7 @@ function Register(): JSX.Element {
                         type="email"
                         {...register('email', User.requiredValidation)}
                     ></input>
-                    <span className="Error">{errors?.email?.message}</span>
+                    <small className="Error">{errors?.email?.message}</small>
                 </div>
                 <div>
                     <label>סיסמה</label>
@@ -54,7 +54,7 @@ function Register(): JSX.Element {
                         type="password"
                         {...register('password', User.requiredValidation)}
                     ></input>
-                    <span className="Error">{errors?.password?.message}</span>
+                    <small className="Error">{errors?.password?.message}</small>
                 </div>
                 <button>הרשמה</button>
             </form>

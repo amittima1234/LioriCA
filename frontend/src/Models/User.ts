@@ -8,7 +8,7 @@ class User {
     public role: string; // user or admin
 
     public static requiredValidation: RegisterOptions<User> = {
-        required: { value: true, message: 'חסר שדה' },
+        required: { value: true, message: 'שדה חובה' },
     };
 }
 

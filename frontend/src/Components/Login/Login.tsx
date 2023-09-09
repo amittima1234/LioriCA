@@ -30,7 +30,9 @@ function Login(): JSX.Element {
                         type="email"
                         {...register('email', Credentials.requiredValidation)}
                     ></input>
-                    <span className="Error">{errors?.email?.message}</span>
+                    <small className="Error">
+                        {errors?.email?.message || ''}
+                    </small>
                 </div>
                 <div>
                     <label>סיסמה</label>
@@ -41,14 +43,16 @@ function Login(): JSX.Element {
                             Credentials.requiredValidation
                         )}
                     ></input>
-                    <span className="Error">{errors?.password?.message}</span>
+                    <small className="Error">
+                        {errors?.password?.message || ''}
+                    </small>
                 </div>
                 <button>התחברות</button>
             </form>
-            <div className="Register">
+            <small className="ToRegisterBtn">
                 עוד לא נרשמת?
                 <NavLink to="/register">להרשמה </NavLink>
-            </div>
+            </small>
         </div>
     );
 }
