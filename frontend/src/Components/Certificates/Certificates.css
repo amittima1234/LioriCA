@@ -1,0 +1,52 @@
+.Certificates {
+    position: relative;
+}
+
+.Certificates > h1 {
+    text-align: center;
+    color: white;
+    font-size: 72px;
+    margin: 0;
+}
+
+.Certificates > div {
+    height: 55vh;
+    overflow: auto;
+    box-sizing: content-box;
+    border: 3px solid #ffffff0f;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 46px;
+    justify-content: center;
+    padding: 12px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    padding: 0;
+    width: 5px;
+    background-color: #ffffff0f;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #ffffff5a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ffffff5a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff5a;
+}
+
+.NewCertificateBtn {
+    position: absolute;
+    bottom: -90px;
+    left: 60px;
+    color: #0e0e0e;
+    font-size: 16px;
+}

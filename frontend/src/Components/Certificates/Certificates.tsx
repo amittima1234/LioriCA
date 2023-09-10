@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { AppState } from '../../Redux/AppState';
 import certificatesService from '../../Services/CertificatesService';
 import CertificateCard from '../CertificateCard/CertificateCard';
+import './Certificates.css';
 
 function Certificates(): JSX.Element {
     const certificates = useSelector(
@@ -16,15 +18,20 @@ function Certificates(): JSX.Element {
     }, []);
 
     return (
-        <div className="ProductsList">
-            {certificates.map((certificate) => (
-                <CertificateCard
-                    key={certificate.uuid}
-                    certificate={certificate}
-                />
-            ))}
+        <div className='Certificates'>
+            <h1>התעודות שלי</h1>
+            <div>
+                {certificates.map((certificate) => (
+                    <CertificateCard
+                        key={certificate.uuid}
+                        certificate={certificate}
+                    />
+                ))}
+            </div>
 
-            <button>הנפקת תעודה חדשה</button>
+            <NavLink to='/certificates/new'>
+                <button className='NewCertificateBtn'>הנפקת תעודה חדשה</button>
+            </NavLink>
         </div>
     );
 }
