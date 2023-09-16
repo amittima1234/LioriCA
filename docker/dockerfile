@@ -1,0 +1,20 @@
+FROM node:latest
+
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install -y expect
+
+COPY ../backend ./
+COPY ../frontend ./code
+RUN rm .env && mv ./prod/.env .env
+RUN npm i
+RUN cd code && npm i 
+RUN cd code && npm run build
+RUN cp -r ./code/build ./build
+RUN cd scripts && chmod +x installCa.sh
+RUN cd scripts && ./installCa.sh https://github.com/OpenVPN/easy-rsa/releases/download/v3.1.2/EasyRSA-3.1.2.tgz
+
+EXPOSE 8008
+
+ENTRYPOINT [ "node", "app.js" ]
