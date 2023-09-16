@@ -106,3 +106,5 @@ dist
 # ignore req and cert files
 backend/reqs
 backend/certs
+
+compose-dev.yaml
