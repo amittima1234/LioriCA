@@ -16,7 +16,7 @@ class User {
         },
     };
 
-    public static requiredValidation: RegisterOptions<User> = {
+    public static requiredValidation: RegisterOptions<User, any > = {
         required: { value: true, message: 'שדה חובה' },
     };
 }
