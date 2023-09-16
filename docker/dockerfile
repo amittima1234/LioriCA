@@ -5,8 +5,8 @@ WORKDIR /app
 RUN apt-get update
 RUN apt-get install -y expect
 
-COPY ./backend ./
-COPY ./frontend ./code
+COPY ../backend ./
+COPY ../frontend ./code
 RUN rm .env && mv ./prod/.env .env
 RUN npm i
 RUN cd code && npm i 

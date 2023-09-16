@@ -4,7 +4,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import fileDownload from 'js-file-download';
 
-export default function Uploud() {
+export default function Upload() {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
     const formData = new FormData();
