@@ -1,0 +1,52 @@
+.Register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    position: relative;
+}
+
+.Register > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 350px;
+    padding: 50px;
+    gap: 16px;
+    background-color: #ffffffc9;
+    color: #777;
+    border-radius: 60px;
+    box-shadow: #00000029 0px 0px 14px;
+    height: 546px;
+    position: relative;
+}
+
+.Register > form > div {
+    direction: rtl;
+}
+
+.Register > form > div > input {
+    color: white;
+    height: 30px;
+    width: 250px;
+    background: none;
+    border: none;
+    box-shadow: #00000029 0px 0px 4px 1px;
+    border-radius: 50px;
+}
+
+.Register > form > div > input:focus {
+    outline: none;
+}
+
+.Register > form > Button {
+    position: absolute;
+    bottom: 50px;
+    border: none;
+    width: 125px;
+}
+
+.Error {
+    color: rgba(194, 18, 18, 0.685);
+}
