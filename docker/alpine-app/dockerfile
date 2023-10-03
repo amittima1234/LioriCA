@@ -15,9 +15,8 @@ RUN npm i
 RUN cd code && npm i 
 RUN cd code && npm run build
 RUN cp -r ./code/build ./build
-RUN cp ./scripts/installCa.sh installCa.sh
-RUN chmod +x /app/installCa.sh 
-RUN installCa.sh https://github.com/OpenVPN/easy-rsa/releases/download/v3.1.2/EasyRSA-3.1.2.tgz
+RUN cd scripts && chmod +x installCa.sh
+RUN cd scripts && /bin/sh installCa.sh "https://github.com/OpenVPN/easy-rsa/releases/download/v3.1.2/EasyRSA-3.1.2.tgz"
 
 EXPOSE 8008
 
