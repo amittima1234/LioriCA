@@ -108,3 +108,4 @@ backend/reqs
 backend/certs
 
 compose-dev.yaml
+.env*

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 ca_folder_path=$1

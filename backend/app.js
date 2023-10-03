@@ -2,15 +2,15 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
 const cors = require("cors");
+const { Console } = require("node:console");
 const app = express();
 
 require('dotenv').config();
 
 app.use(cors());
 
-const CA_FOLDER_PATH = `${process.env.CA_FOLDER_PATH}`;
-const BACKEND_PATH = `${process.env.BACKEND_PATH}`;
-const BACKEND_PORT = `${process.env.BACKEND_PORT}`;
+const CA_FOLDER_PATH = `${require('os').homedir()}/ca/easy-rsa`; //`${process.env.CA_FOLDER_PATH}`;
+const BACKEND_PORT = 8008; //`${process.env.BACKEND_PORT}`;
 const CERT_TYPE = "server";
 
 app.use(express.json());
@@ -38,7 +38,9 @@ app.patch("/upload", (req, res) => {
         const issuedCertificate = issueNewCert(certificateName);
         res.sendFile(issuedCertificate, (err) => {
           if (err) {
-            res.send(err);
+            res.send(err)
+            console.log(err)
+            console.log(issuedCertificate);
           } else {
             console.log("Sent:", issuedCertificate);
           }
@@ -52,7 +54,7 @@ app.patch("/upload", (req, res) => {
 
 const issueNewCert = (certificateName) => {
   execSync(
-    `./scripts/importAndSubmitReq.sh ${CA_FOLDER_PATH} ${BACKEND_PATH}/reqs/${certificateName}.req ${certificateName} ${CERT_TYPE}`,
+    `./scripts/importAndSubmitReq.sh ${CA_FOLDER_PATH} ${__dirname}/reqs/${certificateName}.req ${certificateName} ${CERT_TYPE}`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`);
