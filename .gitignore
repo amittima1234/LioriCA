@@ -109,3 +109,4 @@ backend/certs
 
 compose-dev.yaml
 .env*
+.vscode
