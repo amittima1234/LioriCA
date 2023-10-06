@@ -103,7 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-# ignore req and cert files
+# ignore req and cert files - yay
 backend/reqs
 backend/certs
 
