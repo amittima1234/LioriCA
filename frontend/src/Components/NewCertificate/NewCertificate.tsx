@@ -1,52 +1,81 @@
-import React from "react";
-import "./NewCertificate.css"
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import fileDownload from 'js-file-download';
+import { ChangeEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import Certificate from '../../Models/Certificate';
+import certificatesService from '../../Services/CertificatesService';
+import uploadIcon from '../../Assets/Images/upload-icon.png';
+import './NewCertificate.css';
 
-export default function NewCertificate() {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = async (data : any) => {
-    const formData = new FormData();
-    formData.append("requestFile", data.requestFile[0]);
-    formData.append("certificateName", data.certificateName);
-    axios
-      .patch("http://localhost:8008/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((response) => response.data)
-      .then((file) => {
-        fileDownload(file, `${"username " + Date.now()}.crt`) // TODO: add username + date to the name of the cert
-      });
-  };
+function NewCertificate() {
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: { errors },
+    } = useForm<Certificate>({ shouldUnregister: false });
+    const navigate = useNavigate();
 
-  return (
-    <form
-      className={"form-container"}
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className={"form-field"}>
-        <label>First Name</label>
-        <input
-          placeholder="Your Certificate Name"
-          {...register("certificateName")}
-        />
-      </div>
+    const [file, setFile] = useState(undefined);
 
-      <div className={"form-field"}>
-        <label>Request File</label>
-        <input
-          type="file"
-          placeholder="Your Request File"
-          {...register("requestFile")}
-        />
-      </div>
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setFile((e.target as HTMLInputElement).files[0]);
+    };
 
-      <div>
-        <input className={"submit-button"} type="submit" />
-      </div>
-    </form>
-  );
+    const onFormSubmit = async (certificate: Partial<Certificate>) => {
+        certificate.file = file;
+        try {
+            await certificatesService.addCertificate(certificate);
+            navigate('/certificates');
+        } catch (err: any) {
+            console.log(err.message);
+        }
+    };
+
+    return (
+        <div className="NewCertificate">
+            <form onSubmit={handleSubmit(onFormSubmit)}>
+                <div>
+                    <label>שם התעודה</label>
+                    <input
+                        type="text"
+                        {...register('name', Certificate.requiredValidation)}
+                    />
+                    <small className="Error">{errors?.name?.message}</small>
+                </div>
+
+                <div>
+                    <div className="Upload">
+                        <label>העלאת תעודה</label>
+                        <input
+                            id="file"
+                            type="file"
+                            {...register(
+                                'file',
+                                Certificate.requiredValidation
+                            )}
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange}
+                        />
+                        <button
+                            type="button"
+                            onClick={() =>
+                                document.getElementById('file').click()
+                            }
+                        >
+                            <span>בחר</span>
+                            <img src={uploadIcon} width={10}></img>
+                        </button>
+                    </div>
+                    <div style={{ fontSize: '9px', marginRight: '3px' }}>
+                        {file?.name || ''}
+                    </div>
+                    <small className="Error">{errors?.file?.message}</small>
+                </div>
+
+                <button>הוספה</button>
+            </form>
+        </div>
+    );
 }
+
+export default NewCertificate;
