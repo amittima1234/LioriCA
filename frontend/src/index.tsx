@@ -6,6 +6,9 @@ import App from './App';
 import { appStore } from './Redux/AppState';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import interceptors from './Utils/Interceptors';
+
+interceptors.create();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
