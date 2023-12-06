@@ -136,3 +136,9 @@
     animation: moveInBottom 0.5s ease-out 0.75s;
     animation-fill-mode: backwards;
 }
+
+.logout {
+    direction: rtl;
+    padding: 12px;
+    cursor: pointer;
+}

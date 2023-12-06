@@ -11,7 +11,6 @@ class AuthService {
         const token = (await axios.post<string>(appConfig.registerUrl, user))
             .data;
         localStorage.setItem('token', token);
-        console.log('[gal] ', jwtDecode(token));
         const registeredUser = jwtDecode<{ user: User }>(token).user;
         appStore.dispatch(authActions.register(registeredUser));
     }

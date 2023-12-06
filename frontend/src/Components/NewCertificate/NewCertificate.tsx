@@ -10,7 +10,6 @@ function NewCertificate() {
     const {
         register,
         handleSubmit,
-        setValue,
         formState: { errors },
     } = useForm<Certificate>({ shouldUnregister: false });
     const navigate = useNavigate();
