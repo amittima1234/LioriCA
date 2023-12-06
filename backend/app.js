@@ -2,7 +2,6 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
 const cors = require("cors");
-const { Console } = require("node:console");
 const app = express();
 
 require('dotenv').config();
