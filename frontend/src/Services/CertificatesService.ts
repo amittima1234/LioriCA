@@ -34,7 +34,7 @@ class CertificatesService {
             certificateActions.addOne(
                 (
                     await axios.patch<Certificate>(
-                        appConfig.certificatesUrl,
+                        "http://localhost:8008/upload",
                         certificate,
                         {
                             headers: { 'Content-Type': 'multipart/form-data' },
