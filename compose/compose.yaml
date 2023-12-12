@@ -1,0 +1,11 @@
+services:
+  node-app:
+    image: liori-ca-node
+    build: 
+      context: .
+      dockerfile: ./docker/node-app/Dockerfile
+  alpine-app:
+    build:
+      context: .
+      dockerfile: ./docker/alpine-app/Dockerfile
+    image: liori-ca-alpine
