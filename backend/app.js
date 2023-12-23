@@ -2,6 +2,7 @@ const express = require("express");
 const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
 const { MongoClient } = require("mongodb");
+const fs = require("node:fs");
 const cors = require("cors");
 const app = express();
 
@@ -16,18 +17,17 @@ const MONGODB_URL = "mongodb://0.0.0.0:9000/LioriCA"; // MongoDB connection stri
 
 const client = new MongoClient(MONGODB_URL, { useUnifiedTopology: true }); // Create a connection pool
 
+let db;
 // Connect to MongoDB
 async function connectToDatabase() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
-    const db = client.db();
+    db = client.db();
   } catch (err) {
     console.error("Error connecting to MongoDB:", err);
   }
 }
-
-connectToDatabase();
 
 app.use(express.json());
 app.use(express.static("build"));
@@ -44,20 +44,15 @@ app.get("/", (req, res) => {
 
 app.patch("/upload", (req, res) => {
   if (req.files) {
-    const requestFile = req.files.requestFile;
-    const certificateName = req.body.certificateName;
+    const requestFile = req.files.file;
+    const certificateName = req.body.name;
     const uploadPath = "./reqs/" + certificateName + ".req";
+    console.log(uploadPath);
     requestFile.mv(uploadPath, (err) => {
       if (err) {
         res.status(404).send(err);
       } else {
         const issuedCertificate = issueNewCert(certificateName);
-        const newCertificate = {
-          certificateName,
-          requestFile,
-          issuedCertificate,
-        };
-        db.collection("certificates").insertOne(newCertificate);
         res.sendFile(issuedCertificate, (err) => {
           if (err) {
             res.send(err);
@@ -65,6 +60,13 @@ app.patch("/upload", (req, res) => {
             console.log(issuedCertificate);
           } else {
             console.log("Sent:", issuedCertificate);
+            const certificateFile = fs.readFileSync(issuedCertificate, "utf8");
+            const newCertificate = {
+              certificateName,
+              certificateFile,
+              requestFile,
+            };
+            db.collection("certificates").insertOne(newCertificate);
           }
         });
       }
@@ -91,5 +93,6 @@ const issueNewCert = (certificateName) => {
 };
 
 app.listen(BACKEND_PORT, () => {
+  connectToDatabase();
   console.log(`Example app listening on port ${BACKEND_PORT}`);
 });
