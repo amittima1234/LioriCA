@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Apply cors middleware
 app.use(cors());
 const secretKey = 'secret_key'; // Secret key for JWT
-const mongoUrl = 'mongodb://0.0.0.0:27017/LioriCA'; // MongoDB connection string with the database name
+const mongoUrl = 'mongodb://0.0.0.0:9000/LioriCA'; // MongoDB connection string with the database name
 
 let db: Db;
 const client = new MongoClient(mongoUrl, { useUnifiedTopology: true } as any); // Create a connection pool
