@@ -12,7 +12,7 @@ app.use(cors());
 const CA_FOLDER_PATH = `${require("os").homedir()}/ca/easy-rsa`; //`${process.env.CA_FOLDER_PATH}`;
 const BACKEND_PORT = 8008; //`${process.env.BACKEND_PORT}`;
 const CERT_TYPE = "server";
-const MONGODB_URL = "mongodb://0.0.0.0:27017/LioriCA"; // MongoDB connection string with the database name
+const MONGODB_URL = "mongodb://0.0.0.0:9000/LioriCA"; // MongoDB connection string with the database name
 
 const client = new MongoClient(MONGODB_URL, { useUnifiedTopology: true }); // Create a connection pool
 
