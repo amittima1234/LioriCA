@@ -1,6 +1,7 @@
 import { RegisterOptions } from 'react-hook-form';
 
 class User {
+    public _id: string;
     public id: number;
     public name: string;
     public email: string;
@@ -16,7 +17,7 @@ class User {
         },
     };
 
-    public static requiredValidation: RegisterOptions<User, any > = {
+    public static requiredValidation: RegisterOptions<User, any> = {
         required: { value: true, message: 'שדה חובה' },
     };
 }

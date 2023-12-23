@@ -5,6 +5,8 @@ import Certificate from '../../Models/Certificate';
 import certificatesService from '../../Services/CertificatesService';
 import uploadIcon from '../../Assets/Images/upload-icon.png';
 import './NewCertificate.css';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../Redux/AppState';
 
 function NewCertificate() {
     const {
@@ -13,6 +15,7 @@ function NewCertificate() {
         formState: { errors },
     } = useForm<Certificate>({ shouldUnregister: false });
     const navigate = useNavigate();
+    const _id = useSelector((appState: AppState) => appState.user._id);
 
     const [file, setFile] = useState(undefined);
 
@@ -22,8 +25,9 @@ function NewCertificate() {
 
     const onFormSubmit = async (certificate: Partial<Certificate>) => {
         certificate.file = file;
+
         try {
-            await certificatesService.addCertificate(certificate);
+            await certificatesService.addCertificate(certificate, _id);
             navigate('/certificates');
         } catch (err: any) {
             console.log(err.message);

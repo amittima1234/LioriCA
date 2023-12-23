@@ -10,15 +10,16 @@ function Certificates(): JSX.Element {
     const certificates = useSelector(
         (appState: AppState) => appState.certificates
     ); // certifiactes subscription
+    const _id = useSelector((appState: AppState) => appState.user._id);
 
     useEffect(() => {
         certificatesService
-            .getCertificates()
+            .getCertificates(_id)
             .catch((err) => alert(err.message));
     }, []);
 
     return (
-        <div className='Certificates'>
+        <div className="Certificates">
             <h1>התעודות שלי</h1>
             <div>
                 {certificates.map((certificate) => (
@@ -29,8 +30,8 @@ function Certificates(): JSX.Element {
                 ))}
             </div>
 
-            <NavLink to='/certificates/new'>
-                <button className='NewCertificateBtn'>הנפקת תעודה חדשה</button>
+            <NavLink to="/certificates/new">
+                <button className="NewCertificateBtn">הנפקת תעודה חדשה</button>
             </NavLink>
         </div>
     );

@@ -1,9 +1,11 @@
 class AppConfig {
-    private urlPrefix = 'http://localhost:3000/';
+    private cerificatesUrlPrefix = 'http://localhost:8008/';
+    private authUrlPrefix = 'http://localhost:3000/';
 
-    public certificatesUrl = `${this.urlPrefix}certificates`;
-    public registerUrl = `${this.urlPrefix}register`;
-    public loginUrl = `${this.urlPrefix}login`;
+    public certificatesUrl = `${this.cerificatesUrlPrefix}certificates`;
+    public uploadCertificateUrl = `${this.cerificatesUrlPrefix}upload`;
+    public registerUrl = `${this.authUrlPrefix}register`;
+    public loginUrl = `${this.authUrlPrefix}login`;
 }
 
 const appConfig = new AppConfig();
