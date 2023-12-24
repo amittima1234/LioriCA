@@ -52,10 +52,7 @@ function NewCertificate() {
                         <input
                             id="file"
                             type="file"
-                            {...register(
-                                'file',
-                                Certificate.requiredValidation
-                            )}
+                            {...register('file', Certificate.fileValidation)}
                             style={{ display: 'none' }}
                             onChange={handleFileChange}
                         />

@@ -11,7 +11,7 @@ function AllCertificates(): JSX.Element {
         certificatesService
             .getAllCertificates()
             .then((certs) => setCertificates(certs))
-            .catch((err) => alert(err.message));
+            .catch((err) => console.error(err.message));
     }, []);
 
     return (
