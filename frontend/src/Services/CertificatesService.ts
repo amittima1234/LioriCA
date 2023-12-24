@@ -39,6 +39,11 @@ class CertificatesService {
             )
         );
     }
+
+    public async getAllCertificates(): Promise<Certificate[]> {
+        return (await axios.get<Certificate[]>(`${appConfig.certificatesUrl}`))
+            .data;
+    }
 }
 
 const certificatesService = new CertificatesService();
