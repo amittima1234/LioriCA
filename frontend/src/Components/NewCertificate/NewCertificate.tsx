@@ -20,7 +20,10 @@ function NewCertificate() {
     const [file, setFile] = useState(undefined);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFile((e.target as HTMLInputElement).files[0]);
+        const file = (e.target as HTMLInputElement).files[0];
+        file?.name?.endsWith('.req') || file?.name?.endsWith('.csr')
+            ? setFile(file)
+            : alert('סיומת קובץ לא תקינה');
     };
 
     const onFormSubmit = async (certificate: Partial<Certificate>) => {

@@ -12,16 +12,6 @@ class Certificate {
 
     public static fileValidation: RegisterOptions<Certificate, 'file'> = {
         required: { value: true, message: 'שדה חובה' },
-        validate: (value) => {
-            if (
-                value?.name?.endsWith('.req') ||
-                value?.name?.endsWith('.csr')
-            ) {
-                return true;
-            }
-
-            return 'סיומת קובץ לא תקינה';
-        },
     };
 }
 
