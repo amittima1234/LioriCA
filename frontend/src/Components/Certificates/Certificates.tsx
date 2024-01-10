@@ -15,7 +15,7 @@ function Certificates(): JSX.Element {
     useEffect(() => {
         certificatesService
             .getCertificates(_id)
-            .catch((err) => alert(err.message));
+            .catch((err) => console.error(err.message));
     }, []);
 
     return (

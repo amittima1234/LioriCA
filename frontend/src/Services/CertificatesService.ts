@@ -28,7 +28,7 @@ class CertificatesService {
         appStore.dispatch(
             certificateActions.addOne(
                 (
-                    await axios.patch<Certificate>(
+                    await axios.post<Certificate>(
                         appConfig.uploadCertificateUrl,
                         { ...certificate, userID: _id },
                         {
@@ -38,6 +38,11 @@ class CertificatesService {
                 ).data
             )
         );
+    }
+
+    public async getAllCertificates(): Promise<Certificate[]> {
+        return (await axios.get<Certificate[]>(`${appConfig.certificatesUrl}`))
+            .data;
     }
 }
 

@@ -20,7 +20,10 @@ function NewCertificate() {
     const [file, setFile] = useState(undefined);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFile((e.target as HTMLInputElement).files[0]);
+        const file = (e.target as HTMLInputElement).files[0];
+        file?.name?.endsWith('.req') || file?.name?.endsWith('.csr')
+            ? setFile(file)
+            : alert('סיומת קובץ לא תקינה');
     };
 
     const onFormSubmit = async (certificate: Partial<Certificate>) => {
@@ -52,10 +55,7 @@ function NewCertificate() {
                         <input
                             id="file"
                             type="file"
-                            {...register(
-                                'file',
-                                Certificate.requiredValidation
-                            )}
+                            {...register('file', Certificate.fileValidation)}
                             style={{ display: 'none' }}
                             onChange={handleFileChange}
                         />
