@@ -28,7 +28,7 @@ class CertificatesService {
         appStore.dispatch(
             certificateActions.addOne(
                 (
-                    await axios.patch<Certificate>(
+                    await axios.post<Certificate>(
                         appConfig.uploadCertificateUrl,
                         { ...certificate, userID: _id },
                         {
