@@ -42,33 +42,34 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.patch("/upload", (req, res) => {
+app.post("/upload", (req, res) => {
   if (req.files) {
     const requestFile = req.files.file;
     const certificateName = req.body.name;
+    const userID = req.body.userID
     const uploadPath = "./reqs/" + certificateName + ".req";
     console.log(uploadPath);
     requestFile.mv(uploadPath, (err) => {
       if (err) {
-        res.status(404).send(err);
+        res.status(404).send(err);  
       } else {
         const issuedCertificate = issueNewCert(certificateName);
-        res.sendFile(issuedCertificate, (err) => {
-          if (err) {
-            res.send(err);
+          if (!issuedCertificate) {
             console.log(err);
             console.log(issuedCertificate);
+            res.send(err);
           } else {
-            console.log("Sent:", issuedCertificate);
             const certificateFile = fs.readFileSync(issuedCertificate, "utf8");
             const newCertificate = {
               certificateName,
               certificateFile,
               requestFile,
+              userID
             };
             db.collection("certificates").insertOne(newCertificate);
-          }
-        });
+            res.send(newCertificate);
+            console.log("Sent:", issuedCertificate);
+          };
       }
     });
   } else {
