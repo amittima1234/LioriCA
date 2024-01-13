@@ -99,6 +99,17 @@ app.get("/my-certificates/:userID", async (req, res) => {
   }
 });
 
+app.get("/all-certificates", async (req, res) => {
+  try {
+    const certificatesCollection = db.collection("certificates");
+    const certificates = await certificatesCollection.find({}).toArray();
+    res.json(certificates);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 const issueNewCert = (certificateName) => {
   execSync(
     `./scripts/importAndSubmitReq.sh ${CA_FOLDER_PATH} ${__dirname}/reqs/${certificateName}.req ${certificateName} ${CERT_TYPE}`,
