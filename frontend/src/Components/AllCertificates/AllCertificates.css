@@ -42,3 +42,9 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #ffffff5a;
 }
+
+.home {
+    direction: rtl;
+    padding: 12px;
+    cursor: pointer;
+}
