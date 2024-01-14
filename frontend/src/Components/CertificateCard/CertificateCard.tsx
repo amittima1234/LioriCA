@@ -1,6 +1,8 @@
+import { format } from 'date-fns';
 import certificateIcon from '../../Assets/Images/certificate-icon.png';
 import Certificate from '../../Models/Certificate';
 import './CertificateCard.css';
+import fileDownloaderService from '../../Services/FileDownloaderService';
 
 interface CertificateCardProps {
     certificate: Certificate;
@@ -8,17 +10,23 @@ interface CertificateCardProps {
 
 function CertificateCard({ certificate }: CertificateCardProps): JSX.Element {
     return (
-        <div className='CertificateCard'>
-            <div className='Details'>
-                <span className='Name'>{certificate.name}</span>
+        <div className="CertificateCard">
+            <div className="Details">
+                <span className="Name">{certificate.name}</span>
                 <span>
                     תאריך תפוגה
                     <br />
-                    {certificate.expirationDate.toLocaleString().split(',')[0]}
+                    {format(certificate.expirationDate, 'dd/MM/yyyy')}
                 </span>
             </div>
-            <div className='Image'>
+            <div
+                className="Image"
+                onClick={() =>
+                    fileDownloaderService.downloadCertificate(certificate)
+                }
+            >
                 <img src={certificateIcon} width={100}></img>
+                <span className="Tooltip">לחץ להורדה</span>
             </div>
         </div>
     );

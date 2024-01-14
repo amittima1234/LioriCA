@@ -1,7 +1,7 @@
 import { RegisterOptions } from 'react-hook-form';
 
 class Certificate {
-    public uuid: string;
+    public _id: string;
     public name: string;
     public expirationDate: Date;
     public file: File;

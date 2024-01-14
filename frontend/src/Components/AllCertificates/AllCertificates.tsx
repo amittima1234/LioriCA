@@ -20,7 +20,7 @@ function AllCertificates(): JSX.Element {
             <div>
                 {certificates.map((certificate) => (
                     <CertificateCard
-                        key={certificate.uuid}
+                        key={certificate._id}
                         certificate={certificate}
                     />
                 ))}

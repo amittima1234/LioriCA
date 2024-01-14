@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Certificate from '../../Models/Certificate';
 import certificatesService from '../../Services/CertificatesService';
+import fileDownloaderService from '../../Services/FileDownloaderService';
 import uploadIcon from '../../Assets/Images/upload-icon.png';
 import './NewCertificate.css';
 import { useSelector } from 'react-redux';
@@ -30,10 +31,16 @@ function NewCertificate() {
         certificate.file = file;
 
         try {
-            await certificatesService.addCertificate(certificate, _id);
+            const newCertificate = await certificatesService.addCertificate(
+                certificate,
+                _id
+            );
+            fileDownloaderService.downloadCertificate(newCertificate);
+            window.alert('התעודה הונפקה בהצלחה');
             navigate('/certificates');
         } catch (err: any) {
             console.log(err.message);
+            window.alert('הנפקת התעודה נכשלה');
         }
     };
 

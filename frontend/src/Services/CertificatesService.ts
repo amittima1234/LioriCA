@@ -24,20 +24,19 @@ class CertificatesService {
     public async addCertificate(
         certificate: Partial<Certificate>,
         _id: string
-    ): Promise<void> {
-        appStore.dispatch(
-            certificateActions.addOne(
-                (
-                    await axios.post<Certificate>(
-                        appConfig.uploadCertificateUrl,
-                        { ...certificate, userID: _id },
-                        {
-                            headers: { 'Content-Type': 'multipart/form-data' },
-                        }
-                    )
-                ).data
+    ): Promise<Certificate> {
+        const newCertificate: Certificate = (
+            await axios.post<Certificate>(
+                appConfig.uploadCertificateUrl,
+                { ...certificate, userID: _id },
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                }
             )
-        );
+        ).data;
+        appStore.dispatch(certificateActions.addOne(newCertificate));
+
+        return newCertificate;
     }
 
     public async getAllCertificates(): Promise<Certificate[]> {
