@@ -1,7 +1,7 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const { execSync } = require("node:child_process");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const fs = require("node:fs");
 const cors = require("cors");
 const app = express();
@@ -42,10 +42,11 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.patch("/upload", (req, res) => {
+app.post("/upload", (req, res) => {
   if (req.files) {
     const requestFile = req.files.file;
     const certificateName = req.body.name;
+    const userID = req.body.userID;
     const uploadPath = "./reqs/" + certificateName + ".req";
     console.log(uploadPath);
     requestFile.mv(uploadPath, (err) => {
@@ -53,26 +54,59 @@ app.patch("/upload", (req, res) => {
         res.status(404).send(err);
       } else {
         const issuedCertificate = issueNewCert(certificateName);
-        res.sendFile(issuedCertificate, (err) => {
-          if (err) {
-            res.send(err);
-            console.log(err);
-            console.log(issuedCertificate);
-          } else {
-            console.log("Sent:", issuedCertificate);
-            const certificateFile = fs.readFileSync(issuedCertificate, "utf8");
-            const newCertificate = {
-              certificateName,
-              certificateFile,
-              requestFile,
-            };
-            db.collection("certificates").insertOne(newCertificate);
-          }
-        });
+        if (!issuedCertificate) {
+          console.log(err);
+          console.log(issuedCertificate);
+          res.send(err);
+        } else {
+          const certificateFile = fs.readFileSync(issuedCertificate, "utf8");
+          const currentDate = new Date();
+          const expirationDate = new Date(currentDate);
+          expirationDate.setFullYear(currentDate.getFullYear() + 2);
+          const newCertificate = {
+            name: certificateName,
+            file: certificateFile,
+            reqFile: requestFile,
+            userID,
+            expirationDate,
+          };
+          db.collection("certificates").insertOne(newCertificate);
+          res.send(newCertificate);
+          console.log("Sent:", issuedCertificate);
+        }
       }
     });
   } else {
     res.status(400).send("no files were uploaded");
+  }
+});
+
+app.get("/my-certificates/:userID", async (req, res) => {
+  try {
+    const userID = req.params.userID;
+    const certificatesCollection = db.collection("certificates");
+
+    // Find all certificates for the specified user
+    const certificates = await certificatesCollection
+      .find({ userID })
+      .toArray();
+
+    // Send the certificates as a response
+    res.json(certificates);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+app.get("/all-certificates", async (req, res) => {
+  try {
+    const certificatesCollection = db.collection("certificates");
+    const certificates = await certificatesCollection.find({}).toArray();
+    res.json(certificates);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
