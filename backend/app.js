@@ -99,7 +99,7 @@ app.get("/my-certificates/:userID", async (req, res) => {
   }
 });
 
-app.get("/all-certificates", async (req, res) => {
+app.get("/certificates", async (req, res) => {
   try {
     const certificatesCollection = db.collection("certificates");
     const certificates = await certificatesCollection.find({}).toArray();
