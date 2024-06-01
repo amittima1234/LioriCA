@@ -77,7 +77,7 @@ app.post("/upload", (req, res) => {
       }
     });
   } else {
-    res.status(400).send("no files were uploaded");
+    res.status(400).send("No files were uploaded");
   }
 });
 
